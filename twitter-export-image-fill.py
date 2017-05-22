@@ -38,7 +38,7 @@ else:
 # ---------------------------------
 
 # Re-save the JSON data back to the original file.
-def resave_data(data, data_filename, first_data_line, year_str, month_str):
+def resave_data(data, data_filename, first_data_line):
   # Overwrite the file
   with open(data_filename, 'r+') as f:
     f.seek(0)
@@ -187,7 +187,7 @@ for date in index:
 
         # Re-save the JSON file if we grabbed any avatars
         if data_changed or data_changed_retweet:
-          resave_data(data, data_filename, first_data_line, year_str, month_str)
+          resave_data(data, data_filename, first_data_line)
 
       # Don't continue with saving images if a retweet (unless forced to)
       if (not args.include_retweets) and retweeted:
@@ -264,7 +264,7 @@ for date in index:
 
           # Re-save the original JSON file every time, so that the script can continue
           # from this point
-          resave_data(data, data_filename, first_data_line, year_str, month_str)
+          resave_data(data, data_filename, first_data_line)
 
           # Test whether this media is actually a video
           is_video = '/video/' in media['expanded_url']
