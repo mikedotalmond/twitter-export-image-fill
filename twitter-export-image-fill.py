@@ -39,14 +39,12 @@ else:
 
 # Re-save the JSON data back to the original file.
 def resave_data(data, data_filename, first_data_line, year_str, month_str):
-  # Writing to a separate file so that we can only copy over the
-  # main file when done
-  data_filename_temp = 'data/js/tweets/%s_%s.js.tmp' % (year_str, month_str)
-  with open(data_filename_temp, 'w') as f:
+  # Overwrite the file
+  with open(data_filename, 'r+') as f:
+    f.seek(0)
     f.write(first_data_line)
     json.dump(data, f, indent=2)
-  os.remove(data_filename)
-  os.rename(data_filename_temp, data_filename)
+    f.truncate()
 
 
 # Downloads an avatar image for a tweet.
